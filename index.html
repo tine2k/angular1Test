@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ng-Monitor 1</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="monitor.js"></script>
+</head>
+<body>
+
+<script>
+    angular.element(document).ready(function () {
+        var monitor1 = createMonitor('monitor1', { title: 'Meine Leute'});
+        angular.bootstrap(document.getElementById('monitor1'), ['monitor1']);
+    });
+</script>
+
+<div id="monitor1">
+    <div ng-controller="MonitorController">
+        <h1>{{title}}</h1>
+        <input type="text" ng-model="filterText">
+        <ul ng-if="persons.length > 0">
+            <hr ng-repeat-start="person in persons | filter:filterText" ng-if="$index % 5 == 0" />
+            <li ng-repeat-end>{{$index + 1}}: {{::person.name}} ({{person.age}})</li>
+        </ul>
+        <div></div>
+    </div>
+</div>
+
+</body>
+</html>
